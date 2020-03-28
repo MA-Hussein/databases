@@ -1,0 +1,48 @@
+How can you convert the table into 1NF ?
+What are the super, candidate, primary keys ?
+What are the potential relationships between different possible tables ?
+How can you develop the set of 2NF tables?
+How can you develop the set of 3NF tables?
+
++-----------+---------------+----------------+-----------+-------------+------------+-------------------+-----------+------------------+
+| member_id | member_name   | member_address | dinner_id | dinner_date | venue_code | venue_description | food_code | food_description |
++-----------+---------------+----------------+-----------+-------------+------------+-------------------+-----------+------------------+
+|         1 | Amit          | 325 Max park   | D00001001 | 2020-03-15  | B01        | Grand Ball Room   | C1, C2    | Curry, Cake      |
+|         2 | Ben           | 24 Hudson lane | D00001002 | 2020-03-15  | B02        | Zoku Roof Top     | S1, C2    | Soup, Cake       |
+|         3 | Cristina      | 516 6th Ave    | D00001002 | 2020-03-15  | B02        | Zoku Roof Top     | S1, C2    | Soup, Cake       |
+|         4 | Dan           | 89 John St     | D00001003 | 2020-03-20  | B03        | Goat Farm         | P1, T1, M1| Pie, Tea, Mousse |
+|         5 | Ema           | 91 Pixar St    | D00001003 | 2020-03-20  | B03        | Goat Farm         | P1, T1, M1| Pie, Tea, Mousse |
+|         6 | Fatima        | 56 8th Ave     | D00001004 | 2020-03-20  | B04        | Mama's Kitchen    | F1, M1    | Falafal, Mousse  |
+|         7 | Gabor         | 54 Vivaldi St  | D00001005 | 2020-02-20  | B05        | Hungry Hungary    | G1, P2    | Goulash, Pasca   |
+|         8 | Hema          | 9 Peter St     | D00001003 | 2020-03-20  | B03        | Goat Farm         | P1, T1, M1| Pie, Tea, Mousse |
++-----------+---------------+----------------+-----------+-------------+------------+-------------------+-----------+------------------+
+
+(1)
+1NF Rule 1 Single valued attributes 
+so must change the food_code and food_description columns
++-----------+------------+------------+------------------+-------------------+-----------------+
+| food_code | food_code2 | food_code3 | food_description | food_description 2|food_description3|
++-----------+------------+------------+------------------+-------------------+-----------------+
+
+(2)
+the super key is : member_id, member_address, venue_code, venue_description.
+the candidate key is : member_id, dinner_id, venue_code.
+the primary key is : member_id.
+
+(3)
+the relationships between members table and dinner table is 0ne to one
+the relationships between dinner table and food table is one to many 
+
+(4)
+there is one Rule for 2NF is : no non-prime attribute should be functionally dependent on any proper subset of a candidate key.
+the solution to create three tables 
+1- table members (member_id, member_name, member_address)
+2- venue (venue_code, venue_description, dinner_id, dinner_date)
+3- food (food_codes, food_description)
+
+(5)
+the solution create four tables
+1- table members (member_id, member_name, member_address)
+2- venue (venue_code, venue_description)
+3- dinner (dinner_id, dinner_date)
+3- food (food_codes, food_description)
