@@ -142,7 +142,7 @@ const authors =  [
 	{
 		author_no: 15,
 		author_name: 'Julia',
-		university: 'Maastrecht',
+		university: 'Maastricht',
 		date_of_birth: '1995-08-26',
 		h_index: 1800,
 		gender: 'f',
