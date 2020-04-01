@@ -9,12 +9,18 @@ const connection = mysql.createConnection({
 const execQuery = util.promisify(connection.query.bind(connection));
 
 async function seedData() {
-	const authersConf = `SELECT a.author_name AS Name , b.author_name AS Friend FROM Authors a, 
-                         Authors b where a.author_no = b.friend`;
+	const authersConf = `SELECT
+	a.author_name AS Name ,
+	b.author_name AS Friend
+	FROM Authors a , Authors b 
+	where a.author_no = b.friend`;
 
-	const printAllCol = `SELECT * FROM Authors AS A LEFT JOIN research_papers
-                         AS B on b.author_id= a.author_no`;
-
+	const printAllCol = `SELECT *
+	FROM Authors
+	left join Authorship
+	ON Authorship.author_no = Authors.author_no 
+	LEFT JOIN Research_papers
+	ON Research_papers.paper_id = Authorship.paper_id`;
 	connection.connect();
 
 	try {
