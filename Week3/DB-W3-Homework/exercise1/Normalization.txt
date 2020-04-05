@@ -30,19 +30,38 @@ the candidate key is : member_id, dinner_id, venue_code.
 the primary key is : member_id.
 
 (3)
-the relationships between members table and dinner table is 0ne to one
-the relationships between dinner table and food table is one to many 
+the relationships between members table and dinner table is 0ne to one.
+the relationships between dinner table and food table is one to one.
 
 (4)
 there is one Rule for 2NF is : no non-prime attribute should be functionally dependent on any proper subset of a candidate key.
 the solution to create three tables 
-1- table members (member_id, member_name, member_address)
-2- venue (venue_code, venue_description, dinner_id, dinner_date)
-3- food (food_codes, food_description)
+1- table members (member_id, member_name, member_address) 
+2- venue (venue_code, venue_description, dinner_id, dinner_date) 
+3- food (food_code, food_description) 
 
 (5)
-the solution create four tables
-1- table members (member_id, member_name, member_address)
-2- venue (venue_code, venue_description)
-3- dinner (dinner_id, dinner_date)
-3- food (food_codes, food_description)
+the solution create six tables:
+
+1-TABLE members (member_id INT PRIMARY KEY,member_name VARCHAR(50),member_address TEXT)
+2-TABLE dinners (dinner_id VARCHAR(10) PRIMARY KEY,dinner_date DATE)
+3-TABLE venues (venue_code VARCHAR(5) PRIMARY KEY,venue_description TEXT)
+4-TABLE foods (food_code VARCHAR(5) PRIMARY KEY,food_description TEXT)
+5- TABLE attends (
+      member_id INT PRIMARY KEY,
+      dinner_id VARCHAR(10),
+      venue_code VARCHAR(5),
+      CONSTRAINT FK_member FOREIGN KEY(member_id)
+      REFERENCES members(member_id),
+      CONSTRAINT FK_dinner FOREIGN KEY(dinner_id)
+      REFERENCES dinners(dinner_id),
+      CONSTRAINT FK_venue FOREIGN KEY(venue_code)
+      REFERENCES venues(venue_code))
+
+6- TABLE dinnerFood (
+	  dinner_id VARCHAR(10),
+	  food_code VARCHAR(5),
+	  CONSTRAINT FK_d FOREIGN KEY(dinner_id)
+	  REFERENCES dinners(dinner_id),
+	  CONSTRAINT FK_f FOREIGN KEY(food_code)
+	  REFERENCES foods(food_code))
