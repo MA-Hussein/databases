@@ -12,7 +12,7 @@ const execQuery = util.promisify(connection.query.bind(connection))
 
 
 async function transactionsData(amount, accountFrom, accountTo) {
-    const autoCommit = `set autocommit = 0;`;
+    const noAutoCommit = `set autocommit = 0;`;
     const tran = `start transaction;`;
     const rollback = `rollback;`;
     const commit = `commit;`;
@@ -23,7 +23,7 @@ async function transactionsData(amount, accountFrom, accountTo) {
     const debitAmount = `insert INTO transactions value(2, ${accountTo}, ${amount},'2020-03-20','Amount received')`;
     connection.connect();
     try {
-        await execQuery(autoCommit);
+        await execQuery(noAutoCommit);
         await execQuery(tran);
         await execQuery(creditTransaction);
         await execQuery(debitTtansaction);
